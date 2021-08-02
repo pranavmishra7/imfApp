@@ -1,0 +1,7 @@
+{
+  "name": "imfApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
