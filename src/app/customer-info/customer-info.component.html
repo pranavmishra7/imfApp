@@ -1,0 +1,123 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Customer Info</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form id="customerInfo">
+
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-sub-title>Personal Info</ion-card-sub-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-input placeholder="First Name"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="Middle Name"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="Last Name"></ion-input>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-input placeholder="Flat No, Building name"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="Street, locality"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="City"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-input placeholder="State"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="Pin Code"></ion-input>
+            </ion-col>
+            <ion-col>
+              <!-- <input type="text" ionicTelInput [ionicTelInputOptions]="{initialCountry: 'in'}"
+                (hasError)="hasError($event)" (ionicTelOutput)="getNumber($event)"
+                (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)" /> -->
+              <ion-input placeholder="Contact No" type="tel"></ion-input>
+            </ion-col>
+          </ion-row>
+
+          <!-- <ion-row>
+          <ion-col>
+            1 of 6
+          </ion-col>
+          <ion-col>
+            2 of 6
+          </ion-col>
+          <ion-col>
+            3 of 6
+          </ion-col>
+          <ion-col>
+            4 of 6
+          </ion-col>
+          <ion-col>
+            5 of 6
+          </ion-col>
+          <ion-col>
+            6 of 6
+          </ion-col>
+        </ion-row>
+      
+        <ion-row>
+          <ion-col>
+            1 of 12
+          </ion-col>
+          <ion-col>
+            2 of 12
+          </ion-col>
+          <ion-col>
+            3 of 12
+          </ion-col>
+          <ion-col>
+            4 of 12
+          </ion-col>
+          <ion-col>
+            5 of 12
+          </ion-col>
+          <ion-col>
+            6 of 12
+          </ion-col>
+          <ion-col>
+            7 of 12
+          </ion-col>
+          <ion-col>
+            8 of 12
+          </ion-col>
+          <ion-col>
+            9 of 12
+          </ion-col>
+          <ion-col>
+            10 of 12
+          </ion-col>
+          <ion-col>
+            11 of 12
+          </ion-col>
+          <ion-col>
+            12 of 12
+          </ion-col>
+        </ion-row> -->
+        </ion-grid>
+
+      </ion-card-content>
+    </ion-card>
+  </form>
+
+</ion-content>
