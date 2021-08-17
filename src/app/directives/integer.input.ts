@@ -8,11 +8,8 @@ export class IntegerInputDirective {
 
     constructor(private _el: ElementRef) { }
 
-    @HostListener('keydown', ['$event']) onInputChange(evt:KeyboardEvent) {
+    @HostListener('keypress', ['$event']) onInputChange(evt:KeyboardEvent) {
   
-        if (evt.which === 9 ) {
-            return true;
-        }
       if (evt.which === 8 || evt.which === 0) {
           return true;
       }
