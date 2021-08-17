@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CustomerInfoComponent implements OnInit {
   showCard: boolean = true;
-  // customerInfo:CustomerInfoModel;
+  // customerInfoModel:CustomerInfoModel;
   // corAddress:AddressModel;
   // perAddress:AddressModel;
   addresses:Array<AddressModel>=[]
@@ -21,8 +21,8 @@ export class CustomerInfoComponent implements OnInit {
     public perAddress:AddressModel
   ) { 
     // this.customerInfo=_customerInfo;
-    // this.corAddress=_corAddress;
-    // this.perAddress=_perAddress
+    this.corAddress=new AddressModel();
+    this.perAddress=new AddressModel();
   }
 
   ngOnInit() {
