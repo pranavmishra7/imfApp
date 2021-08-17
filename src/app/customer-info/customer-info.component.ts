@@ -63,7 +63,8 @@ export class CustomerInfoComponent implements OnInit {
     this.customerInfoModel.addresses= this.addresses;
     alert(JSON.stringify(this.customerInfoModel));
   }
-  copyAddress(){
-    this.perAddress=this.corAddress
+  copyAddress(event){
+
+    this.perAddress= event.target.checked ?this.corAddress:new AddressModel();
   }
 }
