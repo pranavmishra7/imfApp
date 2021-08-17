@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Inbox', url: '/customer-info/customer-info', icon: 'mail' },
+    { title: 'Customer Info', url: '/customer-info/customer-info', icon: 'mail' },
     { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
     { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
     { title: 'Archived', url: '/folder/Archived', icon: 'archive' },

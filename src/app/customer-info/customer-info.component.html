@@ -9,14 +9,23 @@
 <ion-content>
   <form id="customerInfo">
 
-
-    <ion-card>
+    <ion-card id="personalInfo" >
       <ion-card-header>
         <ion-card-sub-title>Personal Info</ion-card-sub-title>
+        <!-- <ion-button fill="clear" class="collapse-btn arrow-down" (click)="toggleCard($event)" ></ion-button> -->
       </ion-card-header>
 
       <ion-card-content>
         <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-select value="Mr." okText="Okay" cancelText="Dismiss">
+                <ion-select-option value="Mr.">Mr.</ion-select-option>
+                <ion-select-option value="Mrs.">Mrs.</ion-select-option>
+                <ion-select-option value="Miss">Miss</ion-select-option>
+              </ion-select>
+            </ion-col>
+          </ion-row>
           <ion-row>
             <ion-col>
               <ion-input placeholder="First Name"></ion-input>
@@ -28,92 +37,122 @@
               <ion-input placeholder="Last Name"></ion-input>
             </ion-col>
           </ion-row>
+        </ion-grid>
 
-          <ion-row>
-            <ion-col>
-              <ion-input placeholder="Flat No, Building name"></ion-input>
-            </ion-col>
-            <ion-col>
-              <ion-input placeholder="Street, locality"></ion-input>
-            </ion-col>
-            <ion-col>
-              <ion-input placeholder="City"></ion-input>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-input placeholder="State"></ion-input>
-            </ion-col>
-            <ion-col>
-              <ion-input placeholder="Pin Code"></ion-input>
-            </ion-col>
-            <ion-col>
-              <!-- <input type="text" ionicTelInput [ionicTelInputOptions]="{initialCountry: 'in'}"
-                (hasError)="hasError($event)" (ionicTelOutput)="getNumber($event)"
-                (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)" /> -->
-              <ion-input placeholder="Contact No" type="tel"></ion-input>
-            </ion-col>
-          </ion-row>
-
-          <!-- <ion-row>
-          <ion-col>
-            1 of 6
-          </ion-col>
-          <ion-col>
-            2 of 6
-          </ion-col>
-          <ion-col>
-            3 of 6
-          </ion-col>
-          <ion-col>
-            4 of 6
-          </ion-col>
-          <ion-col>
-            5 of 6
-          </ion-col>
-          <ion-col>
-            6 of 6
-          </ion-col>
-        </ion-row>
-      
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-sub-title>Corrospondence Address</ion-card-sub-title>
+        <!-- <ion-button fill="clear" class="collapse-btn arrow-down" (click)="toggleCard($event)" ></ion-button> -->
+      </ion-card-header>
+      <ion-card-content>
+      <ion-grid>
         <ion-row>
           <ion-col>
-            1 of 12
+            <ion-input placeholder="Flat No, Building name"></ion-input>
           </ion-col>
           <ion-col>
-            2 of 12
+            <ion-input placeholder="Street, locality"></ion-input>
           </ion-col>
           <ion-col>
-            3 of 12
+            <ion-input placeholder="City"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input placeholder="State"></ion-input>
           </ion-col>
           <ion-col>
-            4 of 12
+            <ion-input placeholder="Country"></ion-input>
           </ion-col>
           <ion-col>
-            5 of 12
+            <ion-input placeholder="Pin Code"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-sub-title>Permanent Address</ion-card-sub-title>
+        <!-- <ion-button fill="clear" class="collapse-btn arrow-down" (click)="toggleCard($event)" ></ion-button> -->
+      </ion-card-header>
+      <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+          <ion-checkbox color="primary" value="Same as corrospondence"></ion-checkbox>
+          <ion-label>  Same as corrospondence</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input placeholder="Flat No, Building name"></ion-input>
           </ion-col>
           <ion-col>
-            6 of 12
+            <ion-input placeholder="Street, locality"></ion-input>
           </ion-col>
           <ion-col>
-            7 of 12
+            <ion-input placeholder="City"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input placeholder="State"></ion-input>
           </ion-col>
           <ion-col>
-            8 of 12
+            <ion-input placeholder="Country"></ion-input>
           </ion-col>
           <ion-col>
-            9 of 12
+            <ion-input placeholder="Pin Code"></ion-input>
           </ion-col>
-          <ion-col>
-            10 of 12
-          </ion-col>
-          <ion-col>
-            11 of 12
-          </ion-col>
-          <ion-col>
-            12 of 12
-          </ion-col>
-        </ion-row> -->
+        </ion-row>
+      </ion-grid>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card >
+      <ion-card-header>
+        <ion-card-sub-title>Contact Info</ion-card-sub-title>
+        <!-- <ion-button fill="clear" class="collapse-btn arrow-down"  (click)="toggleCard($event)" ></ion-button> -->
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="thin-col">
+              <ion-input class="input-small" placeholder="STD-Code" maxlength="5"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input  placeholder="Home Phone" maxlength="6"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="thin-col">
+              <ion-input class="input-small" placeholder="STD-Code" maxlength="5"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input  placeholder="Office Phone" maxlength="6"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="thin-col">
+              <ion-input class="input-small" placeholder="Country-Code" maxlength="5"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="Mobile" type="tel" maxlength="10"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-input placeholder="E-mail (Personal)"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="E-mail (Official)"></ion-input>
+            </ion-col>
+          </ion-row>
         </ion-grid>
 
       </ion-card-content>
