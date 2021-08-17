@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form id="customerInfo">
+  <form id="customerInfoModel">
 
     <ion-card id="personalInfo" >
       <ion-card-header>
@@ -25,7 +25,7 @@
           </ion-row> -->
           <ion-row>
             <ion-col>
-              <ion-select value="Mr." okText="Okay" cancelText="Dismiss">
+              <ion-select name="title" value="Mr." okText="Okay" cancelText="Dismiss" [(ngModel)]="customerInfoModel.title">
                 <ion-select-option value="Mr.">Mr.</ion-select-option>
                 <ion-select-option value="Mrs.">Mrs.</ion-select-option>
                 <ion-select-option value="Miss">Miss</ion-select-option>
@@ -34,13 +34,13 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-input placeholder="First Name"></ion-input>
+              <ion-input name="fname" placeholder="First Name" [(ngModel)]="customerInfoModel.firstName"></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input placeholder="Middle Name"></ion-input>
+              <ion-input name="mname" placeholder="Middle Name" [(ngModel)]="customerInfoModel.middleName"></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input placeholder="Last Name"></ion-input>
+              <ion-input name="lname" placeholder="Last Name" [(ngModel)]="customerInfoModel.lastName"></ion-input>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -56,24 +56,24 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-input placeholder="Flat No, Building name"></ion-input>
+            <ion-input name="cobuilding" placeholder="Flat No, Building name" [(ngModel)]="corAddress.building"></ion-input>
           </ion-col>
           <ion-col>
-            <ion-input placeholder="Street, locality"></ion-input>
+            <ion-input name="corstreet" placeholder="Street, locality" [(ngModel)]="corAddress.street"></ion-input>
           </ion-col>
           <ion-col>
-            <ion-input placeholder="City"></ion-input>
+            <ion-input name="cocity" placeholder="City" [(ngModel)]="corAddress.city"></ion-input>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-input placeholder="State"></ion-input>
+            <ion-input name="costate" placeholder="State" [(ngModel)]="corAddress.state"></ion-input>
           </ion-col>
           <ion-col>
-            <ion-input placeholder="Country"></ion-input>
+            <ion-input name="cocountry" placeholder="Country" [(ngModel)]="corAddress.country"></ion-input>
           </ion-col>
           <ion-col>
-            <ion-input placeholder="Pin Code"></ion-input>
+            <ion-input name="copin" placeholder="Pin Code" [(ngModel)]="corAddress.pin"></ion-input>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -89,30 +89,30 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-          <ion-checkbox color="primary" value="Same as corrospondence"></ion-checkbox>
+          <ion-checkbox name="sameaddr" color="primary" value="Same as corrospondence"></ion-checkbox>
           <ion-label>  Same as corrospondence</ion-label>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-input placeholder="Flat No, Building name"></ion-input>
+            <ion-input name="perbuilding" placeholder="Flat No, Building name" [(ngModel)]="perAddress.building"></ion-input>
           </ion-col>
           <ion-col>
-            <ion-input placeholder="Street, locality"></ion-input>
+            <ion-input name="perstreet" placeholder="Street, locality" [(ngModel)]="perAddress.street"></ion-input>
           </ion-col>
           <ion-col>
-            <ion-input placeholder="City"></ion-input>
+            <ion-input name="percity" placeholder="City" [(ngModel)]="perAddress.city"></ion-input>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-input placeholder="State"></ion-input>
+            <ion-input name="perstate" placeholder="State" [(ngModel)]="perAddress.state"></ion-input>
           </ion-col>
           <ion-col>
-            <ion-input placeholder="Country"></ion-input>
+            <ion-input name="percountry" placeholder="Country" [(ngModel)]="perAddress.country"></ion-input>
           </ion-col>
           <ion-col>
-            <ion-input placeholder="Pin Code"></ion-input>
+            <ion-input name="perpin" placeholder="Pin Code" [(ngModel)]="perAddress.pin"></ion-input>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -129,34 +129,34 @@
         <ion-grid>
           <ion-row>
             <ion-col class="thin-col">
-              <ion-input class="input-small" placeholder="STD-Code" maxlength="5"></ion-input>
+              <ion-input name="homestd" class="input-small" placeholder="STD-Code" maxlength="5" [(ngModel)]="customerInfoModel.homeStdCode"></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input  placeholder="Home Phone" maxlength="6"></ion-input>
+              <ion-input name="homephone" placeholder="Home Phone" maxlength="6" [(ngModel)]="customerInfoModel.homePhone"></ion-input>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col class="thin-col">
-              <ion-input class="input-small" placeholder="STD-Code" maxlength="5"></ion-input>
+              <ion-input name="officestd" class="input-small" placeholder="STD-Code" maxlength="5" [(ngModel)]="customerInfoModel.officeStdCode"></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input  placeholder="Office Phone" maxlength="6"></ion-input>
+              <ion-input name="officephone" placeholder="Office Phone" maxlength="6" [(ngModel)]="customerInfoModel.officePhone"></ion-input>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col class="thin-col">
-              <ion-input class="input-small" placeholder="Country-Code" maxlength="5"></ion-input>
+              <ion-input name="countrycode" class="input-small" placeholder="Country-Code" maxlength="5" [(ngModel)]="customerInfoModel.isdCode"></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input placeholder="Mobile" type="tel" maxlength="10"></ion-input>
+              <ion-input name="mobileno" placeholder="Mobile" type="tel" maxlength="10" [(ngModel)]="customerInfoModel.mobilePhone"></ion-input>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-input placeholder="E-mail (Personal)"></ion-input>
+              <ion-input name="peremail" placeholder="E-mail (Personal)" [(ngModel)]="customerInfoModel.emailPersonal"></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input placeholder="E-mail (Official)"></ion-input>
+              <ion-input name="offemail" placeholder="E-mail (Official)" [(ngModel)]="customerInfoModel.emailOfficial"></ion-input>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -170,11 +170,11 @@
   <ion-toolbar>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button color="primary" (click)="eventclick('Saved')">
+        <ion-button color="primary" (click)="eventclick()">
           <ion-icon slot="icon-only" name="save"></ion-icon>
         </ion-button>
         
-        <ion-button color="danger" (click)="eventclick('Clear')">
+        <ion-button color="danger" (click)="eventclick()">
           <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
         </ion-button>
         

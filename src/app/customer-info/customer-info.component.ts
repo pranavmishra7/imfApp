@@ -1,14 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-
+import { CustomerInfoModel } from '../Models/customer-info.model';
+import { AddressModel } from '../Models/address.model';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-customer-info',
   templateUrl: './customer-info.component.html',
   styleUrls: ['./customer-info.component.scss'],
+  providers:[CustomerInfoModel, AddressModel]
   
 })
 export class CustomerInfoComponent implements OnInit {
   showCard: boolean = true;
-  constructor() { }
+  // customerInfo:CustomerInfoModel;
+  // corAddress:AddressModel;
+  // perAddress:AddressModel;
+  addresses:Array<AddressModel>=[]
+  constructor(
+    public customerInfoModel:CustomerInfoModel,
+    public corAddress:AddressModel,
+    public perAddress:AddressModel
+  ) { 
+    // this.customerInfo=_customerInfo;
+    // this.corAddress=_corAddress;
+    // this.perAddress=_perAddress
+  }
 
   ngOnInit() {
     this.showCard = true
@@ -40,7 +55,12 @@ export class CustomerInfoComponent implements OnInit {
     }
 
   }
-  eventclick(message:string){
-alert(message);
+  eventclick(){
+    this.perAddress.addressType="Permanent";
+    this.addresses.push(this.perAddress);
+    this.corAddress.addressType="Corrospondence";
+    this.addresses.push(this.corAddress);
+    this.customerInfoModel.addresses= this.addresses;
+    alert(JSON.stringify(this.customerInfoModel));
   }
 }
