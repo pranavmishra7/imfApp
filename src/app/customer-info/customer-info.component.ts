@@ -79,7 +79,7 @@ export class CustomerInfoComponent implements OnInit {
     this.perAddress = event.target.checked ? this.corAddress : new AddressModel();
   }
   resetform(customerForm: NgForm) {
-    customerForm.reset();
+    customerForm.resetForm();
   }
 
 }
