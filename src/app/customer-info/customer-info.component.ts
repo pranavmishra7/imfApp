@@ -66,7 +66,6 @@ export class CustomerInfoComponent implements OnInit {
       this.corAddress.addressType = "Corrospondence";
       this.addresses.push(this.corAddress);
       this.customerInfoModel.addresses = this.addresses;
-      alert(JSON.stringify(this.customerInfoModel));
       localStorage.setItem("CustomerData", JSON.stringify(this.customerInfoModel))
     }
 
