@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerInfoModel } from '../Models/customer-info.model';
 import { AddressModel } from '../Models/address.model';
 import { NgForm } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+import {ToastLoadController} from '../shared/load.toast.controller'
 @Component({
   selector: 'app-customer-info',
   templateUrl: './customer-info.component.html',
@@ -20,7 +20,7 @@ export class CustomerInfoComponent implements OnInit {
     public customerInfoModel: CustomerInfoModel,
     public corAddress: AddressModel,
     public perAddress: AddressModel,
-    public loadingController: LoadingController
+    public toastLoadController:ToastLoadController
   ) {
     // this.customerInfo=_customerInfo;
     this.corAddress = new AddressModel();
@@ -58,12 +58,12 @@ export class CustomerInfoComponent implements OnInit {
 
   }
   addCustomer(customerForm: NgForm) {
-    
+   
     if (customerForm.invalid) {
       // alert("invalid Data")
     }
     else {
-      this.presentLoadingWithOptions();
+      this.toastLoadController.presentLoadingWithOptions();
       this.perAddress.addressType = "Permanent";
       this.addresses.push(this.perAddress);
       this.corAddress.addressType = "Corrospondence";
@@ -71,6 +71,7 @@ export class CustomerInfoComponent implements OnInit {
       this.customerInfoModel.addresses = this.addresses;
       localStorage.setItem("CustomerData", JSON.stringify(this.customerInfoModel))
       this.resetform(customerForm);
+      this.toastLoadController.presentToastWithOptions();
     }
 
   }
@@ -80,19 +81,5 @@ export class CustomerInfoComponent implements OnInit {
   resetform(customerForm: NgForm) {
     customerForm.reset();
   }
-  async presentLoadingWithOptions() {
-    const loading = await this.loadingController.create({
-      spinner: "circles",
-      duration: 5000,
-      message: 'saving',
-      translucent: true,
-      cssClass: 'custom-loader',
-      backdropDismiss: true,
-      animated:true
-    });
-    await loading.present();
 
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed with role:', role);
-  }
 }
