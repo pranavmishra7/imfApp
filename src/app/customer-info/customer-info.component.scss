@@ -69,3 +69,16 @@
   .show{
     height: 100%;
   }
+  .error{
+    border-bottom: 2px solid red;
+
+  }
+  .footer{
+    position: fixed;
+    left: 0px;
+    bottom: 0;
+    right: 0;
+    border: solid thin #bcc0e2;
+    width: auto;
+
+  }

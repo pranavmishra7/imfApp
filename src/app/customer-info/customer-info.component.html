@@ -7,9 +7,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form id="customerInfoModel">
+  <form id="ngForm" name="customerForm" #customerForm="ngForm" (ngSubmit)="addCustomer(customerForm)">
 
-    <ion-card id="personalInfo" >
+    <ion-card id="personalInfo">
       <ion-card-header>
         <ion-card-sub-title>Personal Info</ion-card-sub-title>
         <!-- <ion-button fill="clear" class="collapse-btn arrow-down" (click)="toggleCard($event)" ></ion-button> -->
@@ -17,30 +17,36 @@
 
       <ion-card-content>
         <ion-grid>
-          <!-- <ion-row>
-            <ion-col>
-            <ion-checkbox color="primary" checked="ckecked" value="Same as corrospondence"></ion-checkbox>
-            <ion-label>  Person Insured Same as Policy Holder</ion-label>
-            </ion-col>
-          </ion-row> -->
           <ion-row>
             <ion-col>
-              <ion-select name="title" value="Mr." okText="Okay" cancelText="Dismiss" [(ngModel)]="customerInfoModel.title">
+              <ion-select name="title" value="Mr." okText="Okay" cancelText="Dismiss"
+                [(ngModel)]="customerInfoModel.title" #titlelCtrl="ngModel" title required
+                [class.error]="customerForm.submitted && !titlelCtrl.valid">
                 <ion-select-option value="Mr.">Mr.</ion-select-option>
                 <ion-select-option value="Mrs.">Mrs.</ion-select-option>
                 <ion-select-option value="Miss">Miss</ion-select-option>
               </ion-select>
+              <!-- <ion-item *ngIf="!titlelCtrl.valid && titlelCtrl.touched">
+                <ion-text color="danger">Title is Required</ion-text>
+              </ion-item> -->
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-input name="fname" placeholder="First Name" [(ngModel)]="customerInfoModel.firstName"></ion-input>
+              <ion-input name="fname" #fnameCtrl="ngModel" fname placeholder="First Name"
+                [(ngModel)]="customerInfoModel.firstName" required
+                [class.error]="customerForm.submitted && !fnameCtrl.valid"></ion-input>
             </ion-col>
+            <!-- <ion-item *ngIf="!fnameCtrl.valid && fnameCtrl.touched">
+              <ion-text color="danger">Title is Required</ion-text>
+            </ion-item> -->
             <ion-col>
               <ion-input name="mname" placeholder="Middle Name" [(ngModel)]="customerInfoModel.middleName"></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input name="lname" placeholder="Last Name" [(ngModel)]="customerInfoModel.lastName"></ion-input>
+              <ion-input name="lname" placeholder="Last Name" [(ngModel)]="customerInfoModel.lastName"
+                #lnameCtrl="ngModel" [class.error]="customerForm.submitted && !lnameCtrl.valid" required>
+              </ion-input>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -53,30 +59,38 @@
         <!-- <ion-button fill="clear" class="collapse-btn arrow-down" (click)="toggleCard($event)" ></ion-button> -->
       </ion-card-header>
       <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-input name="cobuilding" placeholder="Flat No, Building name" [(ngModel)]="corAddress.building"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-input name="corstreet" placeholder="Street, locality" [(ngModel)]="corAddress.street"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-input name="cocity" placeholder="City" [(ngModel)]="corAddress.city"></ion-input>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-input name="costate" placeholder="State" [(ngModel)]="corAddress.state"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-input name="cocountry" placeholder="Country" [(ngModel)]="corAddress.country"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-input name="copin" IntegerInput inputmode="numeric" placeholder="Pin Code" maxlength="6" [(ngModel)]="corAddress.pin"></ion-input>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-input name="cobuilding" placeholder="Flat No, Building name" [(ngModel)]="corAddress.building"
+                #buildingCtrl="ngModel" [class.error]="customerForm.submitted && !buildingCtrl.valid" required></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input name="corstreet" placeholder="Street, locality" [(ngModel)]="corAddress.street"
+                #streetCtrl="ngModel" [class.error]="customerForm.submitted && !streetCtrl.valid" required>
+              </ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input name="cocity" placeholder="City" [(ngModel)]="corAddress.city" #cityCtrl="ngModel"
+                [class.error]="customerForm.submitted && !cityCtrl.valid" required></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-input name="costate" placeholder="State" [(ngModel)]="corAddress.state" #stateCtrl="ngModel"
+                [class.error]="customerForm.submitted && !stateCtrl.valid" required></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input name="cocountry" placeholder="Country" [(ngModel)]="corAddress.country" #countryCtrl="ngModel"
+                [class.error]="customerForm.submitted && !countryCtrl.valid" required></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input name="copin" IntegerInput inputmode="numeric" placeholder="Pin Code" maxlength="6"
+                [(ngModel)]="corAddress.pin" #coPinCtrl="ngModel"
+                [class.error]="customerForm.submitted && !coPinCtrl.valid" required></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ion-card>
 
@@ -86,40 +100,43 @@
         <!-- <ion-button fill="clear" class="collapse-btn arrow-down" (click)="toggleCard($event)" ></ion-button> -->
       </ion-card-header>
       <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-          <ion-checkbox name="sameaddr" color="primary" value="Same as corrospondence" (ionChange)="copyAddress($event)"></ion-checkbox>
-          <ion-label>  Same as corrospondence</ion-label>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-input name="perbuilding" placeholder="Flat No, Building name" [(ngModel)]="perAddress.building"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-input name="perstreet" placeholder="Street, locality" [(ngModel)]="perAddress.street"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-input name="percity" placeholder="City" [(ngModel)]="perAddress.city"></ion-input>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-input name="perstate" placeholder="State" [(ngModel)]="perAddress.state"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-input name="percountry" placeholder="Country" [(ngModel)]="perAddress.country"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-input name="perpin" IntegerInput inputmode="numeric" placeholder="Pin Code" maxlength="6" [(ngModel)]="perAddress.pin"></ion-input>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-checkbox name="sameaddr" color="primary" value="Same as corrospondence"
+                (ionChange)="copyAddress($event)"></ion-checkbox>
+              <ion-label> Same as corrospondence</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-input name="perbuilding" placeholder="Flat No, Building name" [(ngModel)]="perAddress.building">
+              </ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input name="perstreet" placeholder="Street, locality" [(ngModel)]="perAddress.street"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input name="percity" placeholder="City" [(ngModel)]="perAddress.city"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-input name="perstate" placeholder="State" [(ngModel)]="perAddress.state"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input name="percountry" placeholder="Country" [(ngModel)]="perAddress.country"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-input name="perpin" IntegerInput inputmode="numeric" placeholder="Pin Code" maxlength="6"
+                [(ngModel)]="perAddress.pin"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ion-card>
-    
-    <ion-card >
+
+    <ion-card>
       <ion-card-header>
         <ion-card-sub-title>Contact Info</ion-card-sub-title>
         <!-- <ion-button fill="clear" class="collapse-btn arrow-down"  (click)="toggleCard($event)" ></ion-button> -->
@@ -129,34 +146,47 @@
         <ion-grid>
           <ion-row>
             <ion-col class="thin-col">
-              <ion-input name="homestd" IntegerInput inputmode="numeric" class="input-small" placeholder="STD-Code" maxlength="5" [(ngModel)]="customerInfoModel.homeStdCode"></ion-input>
+              <ion-input name="homestd" IntegerInput inputmode="numeric" class="input-small" placeholder="STD-Code"
+                maxlength="5" [(ngModel)]="customerInfoModel.homeStdCode"></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input name="homephone" IntegerInput inputmode="numeric" placeholder="Home Phone" maxlength="6" [(ngModel)]="customerInfoModel.homePhone"></ion-input>
+              <ion-input name="homephone" IntegerInput inputmode="numeric" placeholder="Home Phone" maxlength="6"
+                [(ngModel)]="customerInfoModel.homePhone"></ion-input>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col class="thin-col">
-              <ion-input name="officestd" IntegerInput inputmode="numeric" class="input-small" placeholder="STD-Code" maxlength="5" [(ngModel)]="customerInfoModel.officeStdCode"></ion-input>
+              <ion-input name="officestd" IntegerInput inputmode="numeric" class="input-small" placeholder="STD-Code"
+                maxlength="5" [(ngModel)]="customerInfoModel.officeStdCode"></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input name="officephone" IntegerInput inputmode="numeric" placeholder="Office Phone" maxlength="6" [(ngModel)]="customerInfoModel.officePhone"></ion-input>
+              <ion-input name="officephone" IntegerInput inputmode="numeric" placeholder="Office Phone" maxlength="6"
+                [(ngModel)]="customerInfoModel.officePhone"></ion-input>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col class="thin-col">
-              <ion-input name="countrycode" IntegerInput inputmode="numeric" class="input-small" placeholder="Country-Code" maxlength="3" [(ngModel)]="customerInfoModel.isdCode"></ion-input>
+              <ion-input name="countrycode" IntegerInput inputmode="numeric" class="input-small"
+                placeholder="Country-Code" maxlength="3" [(ngModel)]="customerInfoModel.isdCode" #isdCodeCtrl="ngModel"
+                [class.error]="customerForm.submitted && !isdCodeCtrl.valid" required></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input name="mobileno" IntegerInput inputmode="numeric" placeholder="Mobile" type="tel" maxlength="10" [(ngModel)]="customerInfoModel.mobilePhone"></ion-input>
+              <ion-input name="mobileno" IntegerInput inputmode="numeric" placeholder="Mobile" type="tel" maxlength="10"
+                [(ngModel)]="customerInfoModel.mobilePhone" #mobilenoCtrl="ngModel"
+                [class.error]="customerForm.submitted && !mobilenoCtrl.valid" required></ion-input>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-input name="peremail" placeholder="E-mail (Personal)" [(ngModel)]="customerInfoModel.emailPersonal"></ion-input>
+              <ion-input name="peremail" placeholder="E-mail (Personal)" type="email"
+                [(ngModel)]="customerInfoModel.emailPersonal" #perEmailCtrl="ngModel"
+                [class.error]="customerForm.submitted && !perEmailCtrl.valid" 
+                pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}" required></ion-input>
             </ion-col>
             <ion-col>
-              <ion-input name="offemail" placeholder="E-mail (Official)" [(ngModel)]="customerInfoModel.emailOfficial"></ion-input>
+              <ion-input name="offemail" placeholder="E-mail  (Official)" type="email"
+                [(ngModel)]="customerInfoModel.emailOfficial" pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}"
+                #offEmailCtrl="ngModel" [class.error]="customerInfoModel.emailOfficial && customerForm.submitted && !offEmailCtrl.valid" ></ion-input>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -169,17 +199,18 @@
 <ion-footer class="ion-no-border">
   <ion-toolbar>
     <ion-toolbar>
+
       <ion-buttons slot="start">
-        <ion-button color="primary" (click)="eventclick()">
+        <ion-button color="primary" (click)="customerForm.submitted = true; customerForm.ngSubmit.emit()">
           <ion-icon slot="icon-only" name="save"></ion-icon>
         </ion-button>
-        
-        <ion-button color="danger" (click)="eventclick()">
+
+        <ion-button color="danger" type="reset" (click)="resetform(customerForm)">
           <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
         </ion-button>
-        
+
       </ion-buttons>
-     
+
     </ion-toolbar>
   </ion-toolbar>
 </ion-footer>
