@@ -27,6 +27,7 @@ public async presentLoadingWithOptions() {
 
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed with role:', role);
+    this.presentToastWithOptions();
 }
 
 public async presentToastWithOptions() {

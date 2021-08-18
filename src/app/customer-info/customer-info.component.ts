@@ -71,7 +71,7 @@ export class CustomerInfoComponent implements OnInit {
       this.customerInfoModel.addresses = this.addresses;
       localStorage.setItem("CustomerData", JSON.stringify(this.customerInfoModel))
       this.resetform(customerForm);
-      this.toastLoadController.presentToastWithOptions();
+      // this.toastLoadController.presentToastWithOptions();
     }
 
   }
