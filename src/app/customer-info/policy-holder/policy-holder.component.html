@@ -43,7 +43,8 @@
           </ion-col>
           <ion-col>
             <ion-input name="pan" placeholder="PAN" [(ngModel)]="customerInfoModel.pan" #panCtrl="ngModel"
-              [class.error]="customerForm.submitted && !panCtrl.valid" required maxlength=16 minlength=16></ion-input>
+              [class.error]="customerForm.submitted && !panCtrl.valid" required maxlength=10 minlength=10
+              autocapitalize="characters" style="text-transform:uppercase"></ion-input>
           </ion-col>
           <ion-col>
             <ion-input name="adhaarNo" placeholder="Adhaar Number" [(ngModel)]="customerInfoModel.adhaarnumber"
