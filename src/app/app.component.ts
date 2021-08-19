@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UniversalService } from './shared/services/universalservices/universal.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -9,5 +10,7 @@ export class AppComponent {
     { title: 'Add Customer', url: '/customer-info', icon: 'add' },
   ];
   public labels = [];
-  constructor() {}
+  constructor(_universalService:UniversalService) {
+   
+  }
 }

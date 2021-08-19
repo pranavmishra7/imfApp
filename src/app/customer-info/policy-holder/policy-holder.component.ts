@@ -1,41 +1,65 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CustomerInfoModel } from '../../Models/customer-info.model';
 import { AddressModel } from '../../Models/address.model';
 import { NgForm } from '@angular/forms';
 import { ToastLoadController } from '../../shared/load.toast.controller'
 import { CommonService } from 'src/app/shared/services/common.service';
+import { UniversalService } from 'src/app/shared/services/universalservices/universal.service';
+
 @Component({
   selector: 'app-policy-holder',
   templateUrl: './policy-holder.component.html',
   styleUrls: ['./policy-holder.component.scss'],
 })
 export class PolicyHolderComponent implements OnInit {
-
+  countries: any = [];
   showCard: boolean = true;
   title: string;
   addresses: Array<AddressModel> = []
   maxDate: any = new Date(new Date().setFullYear(new Date().getFullYear())).toISOString();
   @ViewChild('customerForm') public userFrm: NgForm;
+  states: any = [];
+  cities: any = [];
+  isdCodes: any = [];
   constructor(
     public customerInfoModel: CustomerInfoModel,
     public corAddress: AddressModel,
     public perAddress: AddressModel,
     public toastLoadController: ToastLoadController,
-    public _commonService: CommonService
+    public _commonService: CommonService,
+    public _universalService: UniversalService
   ) {
     this.corAddress = new AddressModel();
     this.perAddress = new AddressModel();
     this._commonService.sharedData.subscribe(value => {
       if (this.userFrm) {
-        this.userFrm.ngSubmit.emit()
+        console.log(value);
+        switch (value) {
+          case "save": {
+            this.userFrm.ngSubmit.emit()
+            break;
+          }
+          case "reset": {
+            this.resetform(this.userFrm)
+            break;
+          }
+          default: {
+            //statements; 
+            break;
+          }
+        }
+
       }
 
     })
   }
 
+
   ngOnInit() {
     this.showCard = true
     this.title = "Policy Holder";
+    this.getCountries();
+    this.getCountryCodes();
   }
   hasError($event) {
     console.log($event)
@@ -77,7 +101,9 @@ export class PolicyHolderComponent implements OnInit {
       this.addresses.push(this.corAddress);
       this.customerInfoModel.addresses = this.addresses;
       localStorage.setItem("PolicyHOlder", JSON.stringify(this.customerInfoModel))
+      this._commonService.customerName = this.customerInfoModel.title + " " + this.customerInfoModel.firstName + " " + this.customerInfoModel.lastName;
       this.resetform(customerForm);
+      this._commonService.changeTab("lifeInsured")
       // this.toastLoadController.presentToastWithOptions();
     }
 
@@ -88,6 +114,27 @@ export class PolicyHolderComponent implements OnInit {
   resetform(customerForm: NgForm) {
     customerForm.resetForm();
   }
+  getCountries() {
+    this._universalService.getCountries().subscribe(response => {
+      this.countries = response;
+    })
+  }
+  getstates(country: string) {
 
+    this._universalService.getStates(country).subscribe(response => {
+      this.states = response["data"].states;
+    })
+  }
+  getcities(country: string, state: string) {
+    this._universalService.getCities(country, state).subscribe(response => {
+      this.cities = response;
+    })
+  }
+  getCountryCodes() {
+    this._universalService.getIsdCodes().subscribe(response => {
+      this.isdCodes = response;
+    })
+  }
 
 }
+

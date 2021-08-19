@@ -19,7 +19,7 @@
   
     /* Set full opacity on the placeholder */
     --placeholder-opacity: 1;
-    width: 70px;
+    width: 75px;
     border: solid thin;
     border-radius: 5%;
     background: white;
@@ -71,7 +71,6 @@
   }
   .error{
     border-bottom: 2px solid red;
-
   }
   .footer{
     position: fixed;
@@ -88,21 +87,33 @@
     background: white;
   }
   .tablink {
-    background-color: #555;
-    color: white;
+    background-color:transparent;
+    color: rgb(5, 3, 3);
     float: left;
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
-    font-size: 17px;
-    width: 25%;
+    padding: 0 16px;
+    font-size: 15px;
+   // width: 25%;
+   height: auto;
   }
   
   .tablink:hover {
-    background-color: rgb(24, 136, 14);
+    //background-color: rgb(24, 136, 14);
+   color:green;
   }
   .tab-selected{
-    background-color: rgb(24, 136, 14);
+    //background-color: rgb(24, 136, 14);
+    color: green;
   }
-  
+  small{
+    color: rgb(243, 55, 55);
+  }
+  input{
+    width: 100%;
+    height: 3em;
+    border-radius: 5px;
+    border: 1px solid #bbbaba;
+    background: white;
+  }

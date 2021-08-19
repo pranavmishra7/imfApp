@@ -12,11 +12,15 @@ import {ToastLoadController} from './shared/load.toast.controller';
 import { PolicyHolderComponent } from './customer-info/policy-holder/policy-holder.component';
 import { LifeinsuredComponent } from './customer-info/lifeinsured/lifeinsured.component';
 import { CommonService } from './shared/services/common.service';
+import { HttpClientModule } from '@angular/common/http';
+import { UniversalService } from './shared/services/universalservices/universal.service';
 @NgModule({
   declarations: [AppComponent, CustomerInfoComponent, PolicyHolderComponent, LifeinsuredComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, FormsModule, DirectivesModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ToastLoadController, CommonService],
+  imports: [
+    BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    CommonModule, FormsModule, DirectivesModule,HttpClientModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ToastLoadController, CommonService, UniversalService],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

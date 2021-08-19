@@ -17,8 +17,7 @@ export class CustomerInfoComponent implements OnInit {
   // corAddress:AddressModel;
   // perAddress:AddressModel;
   title:string;
-  showPolicyHolder:boolean;
-  showLifeInsured:boolean;
+ 
   addresses: Array<AddressModel> = []
   maxDate: any = new Date(new Date().setFullYear(new Date().getFullYear())).toISOString();
   constructor(
@@ -37,6 +36,7 @@ export class CustomerInfoComponent implements OnInit {
   ngOnInit() {
     this.showCard = true
     this.title="Policy Holder";
+    this._commonService.changeTab("policyHolder");
   }
   hasError($event) {
     console.log($event)
@@ -51,50 +51,31 @@ export class CustomerInfoComponent implements OnInit {
   onCountryChange($event) {
     console.log($event)
   }
-  toggleCard(event: any) {
-    console.log(event)
-    console.log("show card is: " + this.showCard)
-    this.showCard = this.showCard ? false : true;
-    if (this.showCard) {
-      event.srcElement.classList.add("show");
-      event.srcElement.classList.remove("hide");
-    }
-    else {
-      event.srcElement.classList.add("hide");
-      event.srcElement.classList.remove("show");
-    }
+  // toggleCard(event: any) {
+  //   console.log(event)
+  //   console.log("show card is: " + this.showCard)
+  //   this.showCard = this.showCard ? false : true;
+  //   if (this.showCard) {
+  //     event.srcElement.classList.add("show");
+  //     event.srcElement.classList.remove("hide");
+  //   }
+  //   else {
+  //     event.srcElement.classList.add("hide");
+  //     event.srcElement.classList.remove("show");
+  //   }
 
+  // }
+  callCommonService(value:string){
+    this._commonService.callComponentMetod(value);  
   }
-  saveForm(){
-    this._commonService.callComponentMetod();  
-  }
-  addCustomer(customerForm: NgForm) {
-   this._commonService.callComponentMetod();
-
-    // if (customerForm.invalid) {
-    //   // alert("invalid Data")
-    // }
-    // else {
-    //   this.toastLoadController.presentLoadingWithOptions();
-    //   this.perAddress.addressType = "Permanent";
-    //   this.addresses.push(this.perAddress);
-    //   this.corAddress.addressType = "Corrospondence";
-    //   this.addresses.push(this.corAddress);
-    //   this.customerInfoModel.addresses = this.addresses;
-    //   localStorage.setItem("CustomerData", JSON.stringify(this.customerInfoModel))
-    //   this.resetform(customerForm);
-    //   // this.toastLoadController.presentToastWithOptions();
-    // }
-
-  }
+  // addCustomer(customerForm: NgForm) {
+  //  this._commonService.callComponentMetod();
+  // }
   copyAddress(event) {
     this.perAddress = event.target.checked ? this.corAddress : new AddressModel();
   }
   resetform(customerForm: NgForm) {
     customerForm.resetForm();
   }
-  changeTab(tabName:string){
-    this.showLifeInsured=tabName=="lifeInsured"?true:false;
-    this.showPolicyHolder=tabName=="policyHolder"?true:false;
-  }
+
 }

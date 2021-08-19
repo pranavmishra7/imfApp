@@ -3,28 +3,32 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Add Customer</ion-title>
-  
+    <ion-title>Add Customer <small>(* Required Fields)</small></ion-title>
+    <ion-title *ngIf="this._commonService.customerName && this._commonService.customerName.length>0">
+      {{this._commonService.customerName}}</ion-title>
+
   </ion-toolbar>
- <button type="button" [class.tab-selected]="showPolicyHolder" (click)="changeTab('policyHolder')" class="tablink">Policy Holder</button>
- <button type="button" [class.tab-selected]="showLifeInsured" (click)="changeTab('lifeInsured')" class="tablink" >Life Insured</button>
-  
+  <button type="button" [class.tab-selected]="_commonService.showPolicyHolder"
+    (click)="_commonService.changeTab('policyHolder')" class="tablink">Policy Holder</button>
+  <button type="button" [class.tab-selected]="_commonService.showLifeInsured"
+    (click)="_commonService.changeTab('lifeInsured')" class="tablink">Life Insured</button>
+
 </ion-header>
 <ion-content>
 
-  <app-policy-holder *ngIf="showPolicyHolder"></app-policy-holder>
-  <app-lifeinsured *ngIf="showLifeInsured"></app-lifeinsured>
+  <app-policy-holder *ngIf="_commonService.showPolicyHolder"></app-policy-holder>
+  <app-lifeinsured *ngIf="_commonService.showLifeInsured"></app-lifeinsured>
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-toolbar>
     <ion-toolbar>
 
       <ion-buttons slot="start">
-        <ion-button color="primary" (click)="saveForm()">
+        <ion-button color="primary" (click)="callCommonService('save')">
           <ion-icon slot="icon-only" name="save"></ion-icon>
         </ion-button>
 
-        <ion-button color="danger" type="reset" (click)="resetform()">
+        <ion-button color="danger" type="reset" (click)="callCommonService('reset')">
           <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
         </ion-button>
 
