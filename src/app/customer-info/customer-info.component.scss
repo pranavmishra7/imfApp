@@ -82,3 +82,27 @@
     width: auto;
 
   }
+  ion-datetime{
+    border-radius: 5px;
+    border: 1px solid rgb(187, 186, 186);
+    background: white;
+  }
+  .tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 25%;
+  }
+  
+  .tablink:hover {
+    background-color: rgb(24, 136, 14);
+  }
+  .tab-selected{
+    background-color: rgb(24, 136, 14);
+  }
+  

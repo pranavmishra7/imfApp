@@ -3,6 +3,7 @@ import { CustomerInfoModel } from '../Models/customer-info.model';
 import { AddressModel } from '../Models/address.model';
 import { NgForm } from '@angular/forms';
 import {ToastLoadController} from '../shared/load.toast.controller'
+import { CommonService } from '../shared/services/common.service';
 @Component({
   selector: 'app-customer-info',
   templateUrl: './customer-info.component.html',
@@ -15,20 +16,27 @@ export class CustomerInfoComponent implements OnInit {
   // customerInfoModel:CustomerInfoModel;
   // corAddress:AddressModel;
   // perAddress:AddressModel;
+  title:string;
+  showPolicyHolder:boolean;
+  showLifeInsured:boolean;
   addresses: Array<AddressModel> = []
+  maxDate: any = new Date(new Date().setFullYear(new Date().getFullYear())).toISOString();
   constructor(
     public customerInfoModel: CustomerInfoModel,
     public corAddress: AddressModel,
     public perAddress: AddressModel,
-    public toastLoadController:ToastLoadController
+    public toastLoadController:ToastLoadController,
+    public _commonService:CommonService
   ) {
     // this.customerInfo=_customerInfo;
     this.corAddress = new AddressModel();
     this.perAddress = new AddressModel();
+    
   }
 
   ngOnInit() {
     this.showCard = true
+    this.title="Policy Holder";
   }
   hasError($event) {
     console.log($event)
@@ -57,22 +65,26 @@ export class CustomerInfoComponent implements OnInit {
     }
 
   }
+  saveForm(){
+    this._commonService.callComponentMetod();  
+  }
   addCustomer(customerForm: NgForm) {
-   
-    if (customerForm.invalid) {
-      // alert("invalid Data")
-    }
-    else {
-      this.toastLoadController.presentLoadingWithOptions();
-      this.perAddress.addressType = "Permanent";
-      this.addresses.push(this.perAddress);
-      this.corAddress.addressType = "Corrospondence";
-      this.addresses.push(this.corAddress);
-      this.customerInfoModel.addresses = this.addresses;
-      localStorage.setItem("CustomerData", JSON.stringify(this.customerInfoModel))
-      this.resetform(customerForm);
-      // this.toastLoadController.presentToastWithOptions();
-    }
+   this._commonService.callComponentMetod();
+
+    // if (customerForm.invalid) {
+    //   // alert("invalid Data")
+    // }
+    // else {
+    //   this.toastLoadController.presentLoadingWithOptions();
+    //   this.perAddress.addressType = "Permanent";
+    //   this.addresses.push(this.perAddress);
+    //   this.corAddress.addressType = "Corrospondence";
+    //   this.addresses.push(this.corAddress);
+    //   this.customerInfoModel.addresses = this.addresses;
+    //   localStorage.setItem("CustomerData", JSON.stringify(this.customerInfoModel))
+    //   this.resetform(customerForm);
+    //   // this.toastLoadController.presentToastWithOptions();
+    // }
 
   }
   copyAddress(event) {
@@ -81,5 +93,8 @@ export class CustomerInfoComponent implements OnInit {
   resetform(customerForm: NgForm) {
     customerForm.resetForm();
   }
-
+  changeTab(tabName:string){
+    this.showLifeInsured=tabName=="lifeInsured"?true:false;
+    this.showPolicyHolder=tabName=="policyHolder"?true:false;
+  }
 }

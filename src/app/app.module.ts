@@ -6,14 +6,17 @@ import {CommonModule} from '@angular/common'
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { DirectivesModule } from './directives/directive.module';
-import {ToastLoadController} from './shared/load.toast.controller'
+import {ToastLoadController} from './shared/load.toast.controller';
+import { PolicyHolderComponent } from './customer-info/policy-holder/policy-holder.component';
+import { LifeinsuredComponent } from './customer-info/lifeinsured/lifeinsured.component';
+import { CommonService } from './shared/services/common.service';
 @NgModule({
-  declarations: [AppComponent, CustomerInfoComponent],
+  declarations: [AppComponent, CustomerInfoComponent, PolicyHolderComponent, LifeinsuredComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, FormsModule, DirectivesModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ToastLoadController],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ToastLoadController, CommonService],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

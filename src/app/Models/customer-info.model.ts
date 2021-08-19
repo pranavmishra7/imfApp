@@ -14,4 +14,8 @@ export class CustomerInfoModel{
     mobilePhone:string;
     emailPersonal:string;
     emailOfficial:string;
+    pan:string;
+    adhaarnumber:number;
+    dob:Date;
+    customerType:string;
 }
