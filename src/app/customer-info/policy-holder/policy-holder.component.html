@@ -10,7 +10,7 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-select name="title" value="Mr." okText="Okay" cancelText="Dismiss"
+            <ion-select interface="popover" name="title" value="Mr." okText="Okay" cancelText="Dismiss"
               [(ngModel)]="customerInfoModel.title" #titlelCtrl="ngModel" title required
               [class.error]="customerForm.submitted && !titlelCtrl.valid" placeholder="*Title">
               <ion-select-option value="Mr.">Mr.</ion-select-option>

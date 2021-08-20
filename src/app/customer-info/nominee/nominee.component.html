@@ -15,7 +15,7 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-select name="title" value="Mr." okText="Okay" cancelText="Dismiss"
+            <ion-select interface="popover" name="title" value="Mr." okText="Okay" cancelText="Dismiss"
               [(ngModel)]="nominee.title" #titlelCtrl="ngModel" title required
               [class.error]="customerForm.submitted && !titlelCtrl.valid" placeholder="*Title">
               <ion-select-option value="Mr.">Mr.</ion-select-option>
@@ -48,7 +48,7 @@
             </ion-datetime>
           </ion-col>
           <ion-col>
-            <ion-select class="w-100" name="relation" value="Spouse" okText="Okay" cancelText="Dismiss"
+            <ion-select class="select-primary" interface="popover" name="relation" value="Spouse" okText="Okay" cancelText="Dismiss"
             [(ngModel)]="nominee.relationsip" #relationCtrl="ngModel" required
             [class.error]="customerForm.submitted && !relationCtrl.valid" placeholder="Relationship">
             <ion-select-option value="Spouse">Spouse</ion-select-option>

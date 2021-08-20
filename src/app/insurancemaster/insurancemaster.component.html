@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Add Insurance <small>(* Required Fields)</small></ion-title>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <form id="ngForm" name="InsuranceForm" #InsuranceForm="ngForm"
+  (ngSubmit)="addInsurance(InsuranceForm)">
+  <ion-card id="personalInfo">
+    <ion-card-header>
+      <ion-card-sub-title>Policy Details</ion-card-sub-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-input placeholder="*Policy Name"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input placeholder="*Policy Provider"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-select placeholder="* Policy Term (Year)" interface="popover">
+              <ion-select-option *ngFor="let term of [].constructor(20) ; index as i" [value]="i+1">{{i+1}}</ion-select-option>
+             
+            </ion-select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+</form>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-toolbar>
+
+      <ion-buttons slot="start">
+        <ion-button color="primary" >
+          <ion-icon slot="icon-only" name="save"></ion-icon>
+        </ion-button>
+
+        <ion-button color="danger" type="reset" >
+          <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
+        </ion-button>
+
+      </ion-buttons>
+
+    </ion-toolbar>
+  </ion-toolbar>
+</ion-footer>
