@@ -11,7 +11,7 @@
           <ion-col>
             <ion-select name="title" value="Mr." okText="Okay" cancelText="Dismiss"
               [(ngModel)]="customerInfoModel.title" #titlelCtrl="ngModel" title required
-              [class.error]="customerForm.submitted && !titlelCtrl.valid" placeholder="* Title">
+              [class.error]="customerForm.submitted && !titlelCtrl.valid" placeholder="*Title">
               <ion-select-option value="Mr.">Mr.</ion-select-option>
               <ion-select-option value="Mrs.">Mrs.</ion-select-option>
               <ion-select-option value="Miss">Miss</ion-select-option>
@@ -25,7 +25,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-input name="fname" #fnameCtrl="ngModel" fname placeholder=" * First Name"
+            <ion-input name="fname" #fnameCtrl="ngModel" fname placeholder="*First Name"
               [(ngModel)]="customerInfoModel.firstName" required
               [class.error]="customerForm.submitted && !fnameCtrl.valid"></ion-input>
           </ion-col>
@@ -40,18 +40,18 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-datetime name="dob" placeholder=" * Select Date of Birth" display-timezone="utc"
+            <ion-datetime name="dob" placeholder="*Select Date of Birth" display-timezone="utc"
               displayFormat="DD-MMM-YYYY" min="1900" [max]="maxDate" [(ngModel)]="customerInfoModel.dob"
               #dobCtrl="ngModel" [class.error]="customerForm.submitted && !dobCtrl.valid" required>
             </ion-datetime>
           </ion-col>
           <ion-col>
-            <ion-input name="pan" placeholder=" * PAN" [(ngModel)]="customerInfoModel.pan" #panCtrl="ngModel"
+            <ion-input name="pan" placeholder="*PAN" [(ngModel)]="customerInfoModel.pan" #panCtrl="ngModel"
               [class.error]="customerForm.submitted && !panCtrl.valid" required maxlength=10 minlength=10
               autocapitalize="on" style="text-transform:uppercase"></ion-input>
           </ion-col>
           <ion-col>
-            <ion-input name="adhaarNo" placeholder=" * Adhaar Number" [(ngModel)]="customerInfoModel.adhaarnumber"
+            <ion-input name="adhaarNo" placeholder="*Adhaar No" [(ngModel)]="customerInfoModel.adhaarnumber"
               #adhaarCtrl="ngModel" [class.error]="customerForm.submitted && !adhaarCtrl.valid" required maxlength=12
               minlength=12></ion-input>
           </ion-col>
@@ -70,7 +70,7 @@
         <ion-row>
 
           <ion-col>
-            <input list="corCountries" name="cocountry" placeholder=" * Country" [(ngModel)]="corAddress.country"
+            <input list="corCountries" name="cocountry" placeholder="*Country" [(ngModel)]="corAddress.country"
               #countryCtrl="ngModel" [class.error]="customerForm.submitted && !countryCtrl.valid"
               (change)=getstates(corAddress.country) required>
             <datalist id="corCountries">
@@ -78,7 +78,7 @@
             </datalist>
           </ion-col>
           <ion-col>
-            <input list="corStates" name="costate" placeholder=" * State" [(ngModel)]="corAddress.state"
+            <input list="corStates" name="costate" placeholder="*State" [(ngModel)]="corAddress.state"
               #stateCtrl="ngModel" [class.error]="customerForm.submitted && !stateCtrl.valid"
               (change)="getcities(corAddress.country, corAddress.state)" required>
             <datalist id="corStates">
@@ -86,7 +86,7 @@
             </datalist>
           </ion-col>
           <ion-col>
-            <input list="corCity" name="cocity" placeholder=" * City" [(ngModel)]="corAddress.city" #cityCtrl="ngModel"
+            <input list="corCity" name="cocity" placeholder="*City" [(ngModel)]="corAddress.city" #cityCtrl="ngModel"
               [class.error]="customerForm.submitted && !cityCtrl.valid" required>
             <datalist id="corCity">
               <option *ngFor="let city of cities.data" [value]="city"></option>
@@ -95,17 +95,17 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-input name="cobuilding" placeholder=" * Flat No, Building name" [(ngModel)]="corAddress.building"
+            <ion-input name="cobuilding" placeholder="*Flat No, Building name" [(ngModel)]="corAddress.building"
               #buildingCtrl="ngModel" [class.error]="customerForm.submitted && !buildingCtrl.valid" required>
             </ion-input>
           </ion-col>
           <ion-col>
-            <ion-input name="corstreet" placeholder=" * Street, locality" [(ngModel)]="corAddress.street"
+            <ion-input name="corstreet" placeholder="*Street, locality" [(ngModel)]="corAddress.street"
               #streetCtrl="ngModel" [class.error]="customerForm.submitted && !streetCtrl.valid" required>
             </ion-input>
           </ion-col>
           <ion-col>
-            <ion-input name="copin" IntegerInput inputmode="numeric" placeholder=" * Pin Code" maxlength="6"
+            <ion-input name="copin" IntegerInput inputmode="numeric" placeholder="*Pin Code" maxlength="6"
               [(ngModel)]="corAddress.pin" #coPinCtrl="ngModel"
               [class.error]="customerForm.submitted && !coPinCtrl.valid" required></ion-input>
           </ion-col>
@@ -254,7 +254,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-input name="peremail" placeholder=" * E-mail (Personal)" type="email"
+            <ion-input name="peremail" placeholder="*E-mail (Personal)" type="email"
               [(ngModel)]="customerInfoModel.emailPersonal" #perEmailCtrl="ngModel"
               [class.error]="customerForm.submitted && !perEmailCtrl.valid"
               pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}" required></ion-input>
