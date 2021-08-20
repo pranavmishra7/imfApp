@@ -5,7 +5,7 @@ import { CustomerInfoComponent } from './customer-info/customer-info.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'customer-info',
     pathMatch: 'full'
   },
   {
