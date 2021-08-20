@@ -6,6 +6,7 @@ export class CommonService {
   public customerName: string
   public showPolicyHolder: boolean;
   public showLifeInsured: boolean;
+  public showNominee: boolean;
   constructor() { }
   private baseMethod = new BehaviorSubject("");
   sharedData = this.baseMethod.asObservable();
@@ -16,5 +17,6 @@ export class CommonService {
   changeTab(tabName: string) {
     this.showLifeInsured = tabName == "lifeInsured" ? true : false;
     this.showPolicyHolder = tabName == "policyHolder" ? true : false;
+    this.showNominee = tabName == "nominee" ? true : false;
   }
 }

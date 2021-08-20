@@ -12,12 +12,15 @@
     (click)="_commonService.changeTab('policyHolder')" class="tablink">Policy Holder</button>
   <button type="button" [class.tab-selected]="_commonService.showLifeInsured"
     (click)="_commonService.changeTab('lifeInsured')" class="tablink">Life Insured</button>
+    <button type="button" [class.tab-selected]="_commonService.showNominee"
+    (click)="_commonService.changeTab('nominee')" class="tablink">Nominee</button>
 
 </ion-header>
 <ion-content>
 
   <app-policy-holder *ngIf="_commonService.showPolicyHolder"></app-policy-holder>
   <app-lifeinsured *ngIf="_commonService.showLifeInsured"></app-lifeinsured>
+  <app-nominee *ngIf="_commonService.showNominee"></app-nominee>
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-toolbar>

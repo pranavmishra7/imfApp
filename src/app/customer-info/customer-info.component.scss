@@ -15,14 +15,19 @@
     color: #545ca7;
   
     /* Set a different placeholder color */
-    --placeholder-color: #971e49;
+    //--placeholder-color: #971e49;
   
     /* Set full opacity on the placeholder */
-    --placeholder-opacity: 1;
+    //--placeholder-opacity: 1;
     width: 75px;
     border: solid thin;
     border-radius: 5%;
     background: white;
+  }
+  .w-100{
+    width: 100%;
+    border: solid thin;
+    border-radius: 5%;
   }
   .input-small{
     width: 100px;

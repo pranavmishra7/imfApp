@@ -1,0 +1,202 @@
+<form id="ngForm" name="customerForm" #customerForm="ngForm"
+  (ngSubmit)="customerForm.submitted=true; addCustomer(customerForm)">
+  <ion-card id="personalInfo">
+    <ion-card-content>
+      
+      <ion-button (click)="createNominees()">Add Nominee <ion-icon name="add" ></ion-icon></ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card id="personalInfo" *ngFor="let nominee of nominees ; index as i">
+    <ion-card-header>
+      <ion-card-sub-title>Nominee {{i+1}}</ion-card-sub-title>
+    </ion-card-header>
+
+    <ion-card-content >
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-select name="title" value="Mr." okText="Okay" cancelText="Dismiss"
+              [(ngModel)]="nominee.title" #titlelCtrl="ngModel" title required
+              [class.error]="customerForm.submitted && !titlelCtrl.valid" placeholder="*Title">
+              <ion-select-option value="Mr.">Mr.</ion-select-option>
+              <ion-select-option value="Mrs.">Mrs.</ion-select-option>
+              <ion-select-option value="Miss">Miss</ion-select-option>
+            </ion-select>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input name="fname" #fnameCtrl="ngModel" fname placeholder="*First Name"
+              [(ngModel)]="nominee.firstName" required
+              [class.error]="customerForm.submitted && !fnameCtrl.valid"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input name="mname" placeholder="Middle Name" [(ngModel)]="nominee.middleName"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input name="lname" placeholder=" * Last Name" [(ngModel)]="nominee.lastName"
+              #lnameCtrl="ngModel" [class.error]="customerForm.submitted && !lnameCtrl.valid" required>
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-datetime name="dob" placeholder="*Select Date of Birth" display-timezone="utc"
+              displayFormat="DD-MMM-YYYY" min="1900" [max]="maxDate" [(ngModel)]="nominee.dob"
+              #dobCtrl="ngModel" [class.error]="customerForm.submitted && !dobCtrl.valid" required>
+            </ion-datetime>
+          </ion-col>
+          <ion-col>
+            <ion-select class="w-100" name="relation" value="Spouse" okText="Okay" cancelText="Dismiss"
+            [(ngModel)]="nominee.relationsip" #relationCtrl="ngModel" required
+            [class.error]="customerForm.submitted && !relationCtrl.valid" placeholder="Relationship">
+            <ion-select-option value="Spouse">Spouse</ion-select-option>
+            <ion-select-option value="Child">Child</ion-select-option>
+            <ion-select-option value="Father">Father</ion-select-option>
+            <ion-select-option value="Mother">Mother</ion-select-option>
+          </ion-select>
+          </ion-col>
+          <ion-col>
+            <ion-input name="adhaarNo" placeholder="*Share" [(ngModel)]="nominee.share"
+              #adhaarCtrl="ngModel" [class.error]="customerForm.submitted && !adhaarCtrl.valid" maxlength=5
+              minlength=1 appTwoDigitDecimaNumber max="100" required></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      <ion-card-sub-title>Address</ion-card-sub-title>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-checkbox name="sameaddr" color="primary" value="Same as corrospondence"
+              (ionChange)="copyAddress($event)"></ion-checkbox>
+            <ion-label> Same as life insured</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <input list="countries" name="country" placeholder="Country" [(ngModel)]="address.country"
+              (change)=getstates(address.country)>
+            <datalist id="countries">
+              <option *ngFor="let country of countries.data" [value]="country.name"></option>
+            </datalist>
+          </ion-col>
+          <ion-col>
+            <input name="state" list="states" placeholder="State" [(ngModel)]="address.state"
+              (change)="getcities(address.country, address.state)">
+            <datalist id="states">
+              <option *ngFor="let state of states" [value]="state.name"></option>
+            </datalist>
+          </ion-col>
+          <ion-col>
+            <input name="percity" list="cities" placeholder="City" [(ngModel)]="address.city">
+            <datalist id="cities">
+              <option *ngFor="let city of cities.data" [value]="city"></option>
+            </datalist>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input name="building" placeholder="Flat No, Building name" [(ngModel)]="address.building">
+            </ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input name="street" placeholder="Street, locality" [(ngModel)]="address.street"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input name="pin" IntegerInput inputmode="numeric" placeholder="Pin Code" maxlength="6"
+              [(ngModel)]="address.pin"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-card-sub-title>Contact Info</ion-card-sub-title>
+      <ion-grid>    
+        <ion-row>
+          <ion-col class="thin-col">
+            <input list="countryCode" name="countrycode" IntegerInput inputmode="numeric" class="input-small"
+              placeholder="Country" maxlength="3" [(ngModel)]="customerInfoModel.isdCode" #isdCodeCtrl="ngModel"
+              [class.error]="customerForm.submitted && !isdCodeCtrl.valid">
+            <datalist id="countryCode">
+              <option *ngFor="let code of isdCodes.data" [value]="code.dial_code">{{code.name}}</option>
+            </datalist>
+          </ion-col>
+          <ion-col>
+            <ion-input name="mobileno" IntegerInput inputmode="numeric" placeholder="Mobile No" type="tel"
+              maxlength="10" [(ngModel)]="customerInfoModel.mobilePhone" #mobilenoCtrl="ngModel"
+              [class.error]="customerForm.submitted && !mobilenoCtrl.valid"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input name="peremail" placeholder="E-mail (Personal)" type="email"
+              [(ngModel)]="customerInfoModel.emailPersonal" #perEmailCtrl="ngModel"
+              [class.error]="customerForm.submitted && !perEmailCtrl.valid"
+              pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}" ></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input name="offemail" placeholder="E-mail  (Official)" type="email"
+              [(ngModel)]="customerInfoModel.emailOfficial"
+              pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}" #offEmailCtrl="ngModel"
+              [class.error]="customerInfoModel.emailOfficial && customerForm.submitted && !offEmailCtrl.valid">
+            </ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-sub-title>Correspondence Address</ion-card-sub-title>
+
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+
+          <ion-col>
+            <input list="corCountries" name="cocountry" placeholder="*Country" [(ngModel)]="corAddress.country"
+              #countryCtrl="ngModel" [class.error]="customerForm.submitted && !countryCtrl.valid"
+              (change)=getstates(corAddress.country) required>
+            <datalist id="corCountries">
+              <option *ngFor="let country of countries.data" [value]="country.name"></option>
+            </datalist>
+          </ion-col>
+          <ion-col>
+            <input list="corStates" name="costate" placeholder="*State" [(ngModel)]="corAddress.state"
+              #stateCtrl="ngModel" [class.error]="customerForm.submitted && !stateCtrl.valid"
+              (change)="getcities(corAddress.country, corAddress.state)" required>
+            <datalist id="corStates">
+              <option *ngFor="let state of states" [value]="state.name"></option>
+            </datalist>
+          </ion-col>
+          <ion-col>
+            <input list="corCity" name="cocity" placeholder="*City" [(ngModel)]="corAddress.city" #cityCtrl="ngModel"
+              [class.error]="customerForm.submitted && !cityCtrl.valid" required>
+            <datalist id="corCity">
+              <option *ngFor="let city of cities.data" [value]="city"></option>
+            </datalist>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input name="cobuilding" placeholder="*Flat No, Building name" [(ngModel)]="corAddress.building"
+              #buildingCtrl="ngModel" [class.error]="customerForm.submitted && !buildingCtrl.valid" required>
+            </ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input name="corstreet" placeholder="*Street, locality" [(ngModel)]="corAddress.street"
+              #streetCtrl="ngModel" [class.error]="customerForm.submitted && !streetCtrl.valid" required>
+            </ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input name="copin" IntegerInput inputmode="numeric" placeholder="*Pin Code" maxlength="6"
+              [(ngModel)]="corAddress.pin" #coPinCtrl="ngModel"
+              [class.error]="customerForm.submitted && !coPinCtrl.valid" required></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card> -->
+
+</form>

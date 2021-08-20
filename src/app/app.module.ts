@@ -14,8 +14,9 @@ import { LifeinsuredComponent } from './customer-info/lifeinsured/lifeinsured.co
 import { CommonService } from './shared/services/common.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UniversalService } from './shared/services/universalservices/universal.service';
+import { NomineeComponent } from './customer-info/nominee/nominee.component';
 @NgModule({
-  declarations: [AppComponent, CustomerInfoComponent, PolicyHolderComponent, LifeinsuredComponent],
+  declarations: [AppComponent, CustomerInfoComponent, PolicyHolderComponent, LifeinsuredComponent, NomineeComponent],
   entryComponents: [],
   imports: [
     BrowserModule, IonicModule.forRoot(), AppRoutingModule,
