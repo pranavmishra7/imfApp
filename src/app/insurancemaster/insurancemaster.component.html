@@ -19,16 +19,63 @@
       <ion-grid>
         <ion-row>
           <ion-col>
+            <input list="lstProductCategory"  placeholder="*Product Category">
+            <datalist id="lstProductCategory">
+              <option *ngFor="let productCategory of productCategories" [value]="productCategory"></option>
+            </datalist>
+          </ion-col>
+          <ion-col>
+            <input list="lstPlanCategory"  placeholder="*Plan Category">
+            <datalist id="lstPlanCategory">
+              <option *ngFor="let planCategory of planCategories" [value]="planCategory"></option>
+            </datalist>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <input list="lstManufacturer"  placeholder="*Insurance Provider">
+            <datalist id="lstManufacturer">
+              <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer"></option>
+            </datalist>
+          </ion-col>
+          <ion-col>
             <ion-input placeholder="*Policy Name"></ion-input>
           </ion-col>
+        </ion-row>
+        <ion-row>
           <ion-col>
-            <ion-input placeholder="*Policy Provider"></ion-input>
+            <ion-input placeholder="*Sum Assured" IntegerInput inputmode="numeric"></ion-input>
           </ion-col>
           <ion-col>
-            <ion-select placeholder="* Policy Term (Year)" interface="popover">
+            <ion-input placeholder="*Premium Paying Term" IntegerInput inputmode="numeric"></ion-input>
+            <!-- <ion-select placeholder="*Premium Paying Term" interface="popover">
               <ion-select-option *ngFor="let term of [].constructor(20) ; index as i" [value]="i+1">{{i+1}}</ion-select-option>
              
+            </ion-select> -->
+           
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input placeholder="*Policy Term" IntegerInput inputmode="numeric"></ion-input>
+          </ion-col>
+          <ion-col style="width: 50%;">
+             <ion-select placeholder="*Premium Paying Mode" [interface]="selectInterface">
+              <ion-select-option> Annually </ion-select-option>
+              <ion-select-option> Half Yearly </ion-select-option>
+              <ion-select-option> Quarterly </ion-select-option>
+              <ion-select-option> Monthly </ion-select-option>
+              <ion-select-option> One Time </ion-select-option>
             </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input placeholder="Modal Premium" readonly></ion-input>
+          </ion-col>
+
+          <ion-col>
+            <ion-input placeholder="Annualized Premium" readonly></ion-input>
           </ion-col>
         </ion-row>
       </ion-grid>
