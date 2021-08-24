@@ -19,15 +19,15 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <input list="lstProductCategory"  placeholder="*Product Category">
+            <input list="lstProductCategory"  placeholder="*Product Category" (change)="getInsurancePlan($event.target.value)">
             <datalist id="lstProductCategory">
-              <option *ngFor="let productCategory of productCategories" [value]="productCategory"></option>
+              <option *ngFor="let insuranceCategory of insuranceCategories" [value]="insuranceCategory.name">{{insuranceCategory.name}}</option>
             </datalist>
           </ion-col>
           <ion-col>
             <input list="lstPlanCategory"  placeholder="*Plan Category">
             <datalist id="lstPlanCategory">
-              <option *ngFor="let planCategory of planCategories" [value]="planCategory"></option>
+              <option *ngFor="let insurancePlan of insurancePlans" [value]="insurancePlan.name">{{insurancePlan.name}}</option>
             </datalist>
           </ion-col>
         </ion-row>

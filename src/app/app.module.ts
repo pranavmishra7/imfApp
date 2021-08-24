@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UniversalService } from './shared/services/universalservices/universal.service';
 import { NomineeComponent } from './customer-info/nominee/nominee.component';
 import { InsurancemasterComponent } from './insurancemaster/insurancemaster.component';
+import { MongoService } from './shared/services/mongo.service';
 @NgModule({
   declarations: [AppComponent, CustomerInfoComponent, PolicyHolderComponent,
     LifeinsuredComponent, NomineeComponent, InsurancemasterComponent],
@@ -23,7 +24,8 @@ import { InsurancemasterComponent } from './insurancemaster/insurancemaster.comp
   imports: [
     BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     CommonModule, FormsModule, DirectivesModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ToastLoadController, CommonService, UniversalService],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ToastLoadController, 
+            CommonService, UniversalService, MongoService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
