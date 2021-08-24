@@ -141,4 +141,10 @@ export class InsurancemasterComponent implements OnInit {
         
     }
   }
+  addInsurancePlan(name:string){
+    let insuranceplan= new InsurancePlanModel();
+    insuranceplan.name=name;
+    this.insurancePlans.push(insuranceplan);
+    this.insuranceplanModel.name=""
+  }
 }
