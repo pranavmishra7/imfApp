@@ -5,6 +5,7 @@ import { InsurancemasterService } from '../shared/services/insurancemaster.servi
 import { InsuranceCategoryModel } from '../Models/insurance.category.model';
 import { InsurancePlanModel } from '../Models/insurance.plan.model';
 import { MongoService } from '../shared/services/mongo.service';
+import{Platform} from '@ionic/angular'
 @Component({
   selector: 'app-insurancemaster',
   templateUrl: './insurancemaster.component.html',
@@ -32,8 +33,10 @@ export class InsurancemasterComponent implements OnInit {
     public insuranceMasterModel: InsuranceMaster,
     public insuranceplanModel: InsurancePlanModel,
     public insuranceCategoryModel: InsuranceCategoryModel,
-    public _mongoservice:MongoService) {
+    public _mongoservice:MongoService,
+    public _platform:Platform) {
       //_mongoservice.connectdb();
+      let platforms= _platform.platforms()
      }
 
   ngOnInit() {
