@@ -29,6 +29,34 @@ public async presentLoadingWithOptions() {
     console.log('Loading dismissed with role:', role);
     this.presentToastWithOptions();
 }
+public async presentLoading() {
+    const loading = await this.loadingController.create({
+        spinner: "circles",
+        duration: 2000,
+        message: 'saving',
+        translucent: true,
+        cssClass: 'custom-loader',
+        backdropDismiss: true,
+        animated: true
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed with role:', role);
+}
+public async presentToast(isSuccess:boolean) {
+    let message = isSuccess?'Saved Successfully':'oops! something went wrong';
+    const toast = await this.toastController.create({
+        // header: 'Customer Information Saved',
+        message: message,
+        position: 'top',
+        duration: 2000,
+    });
+    await toast.present();
+
+    const { role } = await toast.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+}
 
 public async presentToastWithOptions() {
     const toast = await this.toastController.create({

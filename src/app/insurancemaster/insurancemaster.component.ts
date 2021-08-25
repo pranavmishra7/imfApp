@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { InsuranceMaster } from '../Models/insurance.master.model';
-import { InsurancemasterService } from '../shared/services/insurancemaster.service';
 import { InsuranceCategoryModel } from '../Models/insurance.category.model';
 import { InsurancePlanModel } from '../Models/insurance.plan.model';
 import { MongoService } from '../shared/services/mongo.service';
-import{Platform} from '@ionic/angular'
+import { Platform } from '@ionic/angular'
+import { InsuranceMasterService } from '../shared/services/insurance.master.service';
+import { ToastLoadController } from '../shared/load.toast.controller';
 @Component({
   selector: 'app-insurancemaster',
   templateUrl: './insurancemaster.component.html',
   styleUrls: ['./insurancemaster.component.scss'],
-  providers: [InsuranceMaster, InsuranceMaster, InsuranceCategoryModel, InsurancePlanModel, MongoService]
+  providers: [InsuranceMaster, InsuranceMaster, InsuranceCategoryModel, InsurancePlanModel, MongoService, InsuranceMasterService]
 })
 export class InsurancemasterComponent implements OnInit {
   productCategories: string[] = [];
   planCategories: string[] = [];
   manufacturers: string[] = [];
   selectInterface: string = "popover";
-  insuranceCategories:Array<InsuranceCategoryModel>=[]
-  insurancePlans:Array<InsurancePlanModel>=[];
+  insuranceCategories: Array<InsuranceCategoryModel> = []
+  insurancePlans: Array<InsurancePlanModel> = [];
 
-  lifeInsurancePlan:Array<InsurancePlanModel>=[];
+  lifeInsurancePlan: Array<InsurancePlanModel> = [];
   // motorInsurancePlan:Array<InsurancePlanModel>=[];
   // healthInsurancePlan:Array<InsurancePlanModel>=[];
   // travelInsurancePlan:Array<InsurancePlanModel>=[];
@@ -29,125 +30,72 @@ export class InsurancemasterComponent implements OnInit {
   // cycleInsurancePlan:Array<InsurancePlanModel>=[];
   // bytesizeInsurancePlan:Array<InsurancePlanModel>=[];
   constructor(
-    public _insuranceMasterService: InsurancemasterService,
     public insuranceMasterModel: InsuranceMaster,
     public insuranceplanModel: InsurancePlanModel,
-    public insuranceCategoryModel: InsuranceCategoryModel,
-    public _mongoservice:MongoService,
-    public _platform:Platform) {
-      //_mongoservice.connectdb();
-      let platforms= _platform.platforms()
-     }
+    public insuranceCategory: InsuranceCategoryModel,
+    public _mongoservice: MongoService,
+    public _platform: Platform,
+    public _insuranceMasterService: InsuranceMasterService,
+    public toastLoadController: ToastLoadController,
+  ) {
+    //_mongoservice.connectdb();
+    let platforms = _platform.platforms()
+  }
 
   ngOnInit() {
-    this.getInsuranceCategory()
-  }
-  addInsurance(InsuranceForm: NgForm) {
-   
-  }
-  getLifeInsurancePlan():InsurancePlanModel[] {
-    let termPlan=new InsurancePlanModel()
-    termPlan.id="1"
-    termPlan.name="Term Plan"
-    this.lifeInsurancePlan.push(termPlan)
-
-    let endowmentPlan=new InsurancePlanModel()
-    endowmentPlan.id="2"
-    endowmentPlan.name="Endowment Plan"
-    this.lifeInsurancePlan.push(endowmentPlan)
-
-    let ulipPlan=new InsurancePlanModel()
-    ulipPlan.id="3"
-    ulipPlan.name="ULIP"
-    this.lifeInsurancePlan.push(ulipPlan)
-
-    let wholeLifeInsurancePlan=new InsurancePlanModel()
-    wholeLifeInsurancePlan.id="4"
-    wholeLifeInsurancePlan.name="Whole Life Insurance"
-    this.lifeInsurancePlan.push(wholeLifeInsurancePlan)
-
-    let childrenPlanPlan=new InsurancePlanModel()
-    childrenPlanPlan.id="5"
-    childrenPlanPlan.name="Children Plan"
-    this.lifeInsurancePlan.push(childrenPlanPlan)
-
-    let moneyBackPlan=new InsurancePlanModel()
-    moneyBackPlan.id="6"
-    moneyBackPlan.name="Money-Back"
-    this.lifeInsurancePlan.push(moneyBackPlan)
-
-    let retirementPlan=new InsurancePlanModel()
-    retirementPlan.id="7"
-    retirementPlan.name="Retirement Plan"
-    this.lifeInsurancePlan.push(retirementPlan)
-    return this.lifeInsurancePlan;
+    this.insuranceCategory = new InsuranceCategoryModel();
+    this.insurancePlans = [];
+    this.getInsuranceCategories();
   }
 
-  getMotorInsurancePlan():InsurancePlanModel[]{
-    this.insurancePlans=[];
-    let carInsurancePlan = new InsurancePlanModel();
-    carInsurancePlan.id="1";
-    carInsurancePlan.name="Car Insurance";
-    this.insurancePlans.push(carInsurancePlan);
-    let twowheelerplan= new InsurancePlanModel();
-    twowheelerplan.id="2";
-    twowheelerplan.name="Two-wheeler Insurance";
-    this.insurancePlans.push(twowheelerplan);
-    return this.insurancePlans;
+  getInsuranceCategories() {
+    this._insuranceMasterService.getInsuraceCategories().subscribe(response => {
+      this.insuranceCategories = response
+    })
   }
-
-  getHealthInsurancePlan():InsurancePlanModel[]{
-
-    return this.insurancePlans;
+  getInsurancePlans(id:string){
+    this._insuranceMasterService.getInsuracePlans(id).subscribe(response=>{
+      this.insurancePlans=response
+    })
   }
-
-  getTravelInsurancePlan():InsurancePlanModel[]{
-
-    return this.insurancePlans;
-  }
-
-  getPropertyInsurancePlan():InsurancePlanModel[]{
-
-    return this.insurancePlans;
-  }
-
-  getMobileInsurancePlan():InsurancePlanModel[]{
-
-    return this.insurancePlans;
-  }
-
-  getCycleInsurancePlan():InsurancePlanModel[]{
-
-    return this.insurancePlans;
-  }
-  getBitesizeinsurancePlan():InsurancePlanModel[]{
-    return this.insurancePlans;
-  }
-  getInsuranceCategory() {
-    
-    let lifeinsurance= new InsuranceCategoryModel();
-    lifeinsurance.id="1";
-    lifeinsurance.name="Life Insurance";
-    //lifeinsurance.plan=this.getInsurancePlan();
-    this.insuranceCategories.push(lifeinsurance)
-  }
-  getInsurancePlan(insuranceCategory){
-    switch (insuranceCategory)
-    {
-      case 'Life Insurance':{
-        this.insurancePlans= this.getLifeInsurancePlan()
-        break;
-      }
-      default:{
-        break;
-      }
-        
+  addInsurancePlan(name: string) {
+    if (name && name.length > 0) {
+      let insuranceplan = new InsurancePlanModel();
+      insuranceplan.name = name;
+      insuranceplan.isActive = true;
+      this.insurancePlans.push(insuranceplan);
+      this.insuranceplanModel.name = "";
+      this.insuranceCategory.insurancePlans = this.insurancePlans;
+    }
+    else {
+      alert("Invalid Input")
     }
   }
-  addInsurancePlan(name:string){
-    let insuranceplan= new InsurancePlanModel();
-    insuranceplan.name=name;
-    this.insurancePlans.push(insuranceplan);
-    this.insuranceplanModel.name=""
+  saveInsuranceCategory(form: NgForm) {
+    if (form.valid) {
+      this.insuranceCategory.isActive = true;
+      this.toastLoadController.presentLoading()
+      this._insuranceMasterService.postInsuraceCategory(this.insuranceCategory).subscribe(response => {
+        if (response) {
+
+          this.toastLoadController.presentToast(true);
+        }
+      })
+    }
+  }
+  resetModel(modelname: string) {
+    switch (modelname) {
+      case "insuranceCategory":
+        this.insuranceCategory = new InsuranceCategoryModel();
+        this.insurancePlans = [];
+        break;
+
+      default:
+        break;
+    }
+  }
+  setInsurancecategory(id: string) {
+    this.insuranceCategory = this.insuranceCategories.find(x => x.name == id)
+    this. getInsurancePlans(this.insuranceCategory.id)
   }
 }

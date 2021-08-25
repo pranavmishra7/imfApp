@@ -17,6 +17,7 @@ import { UniversalService } from './shared/services/universalservices/universal.
 import { NomineeComponent } from './customer-info/nominee/nominee.component';
 import { InsurancemasterComponent } from './insurancemaster/insurancemaster.component';
 import { MongoService } from './shared/services/mongo.service';
+import { AppConfig } from './shared/app.config';
 @NgModule({
   declarations: [AppComponent, CustomerInfoComponent, PolicyHolderComponent,
     LifeinsuredComponent, NomineeComponent, InsurancemasterComponent],
@@ -25,7 +26,7 @@ import { MongoService } from './shared/services/mongo.service';
     BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     CommonModule, FormsModule, DirectivesModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ToastLoadController, 
-            CommonService, UniversalService, MongoService],
+            CommonService, UniversalService, MongoService, AppConfig],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
