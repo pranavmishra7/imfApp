@@ -77,7 +77,7 @@ export class InsurancemasterComponent implements OnInit {
       this.toastLoadController.presentLoading()
       this._insuranceMasterService.postInsuraceCategory(this.insuranceCategory).subscribe(response => {
         if (response) {
-
+          this.getInsuranceCategories();
           this.toastLoadController.presentToast(true);
         }
       })
@@ -95,7 +95,11 @@ export class InsurancemasterComponent implements OnInit {
     }
   }
   setInsurancecategory(id: string) {
-    this.insuranceCategory = this.insuranceCategories.find(x => x.name == id)
-    this. getInsurancePlans(this.insuranceCategory.id)
+    if(this.insuranceCategories.find(x => x.name == id)!=undefined)
+    {
+      this.insuranceCategory = this.insuranceCategories.find(x => x.name == id)
+      this. getInsurancePlans(this.insuranceCategory.id)
+    }
+    
   }
 }
