@@ -8,6 +8,51 @@
 
 </ion-header>
 <ion-content>
+  <form>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-sub-title>Policy Category</ion-card-sub-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid> 
+          <ion-row>
+            <ion-col>
+              <input list="lstProductCategory"  placeholder="*Product Category" (change)="getInsurancePlan($event.target.value)">
+              <datalist id="lstProductCategory">
+                <option *ngFor="let insuranceCategory of insuranceCategories" [value]="insuranceCategory.name">{{insuranceCategory.name}}</option>
+              </datalist>
+            </ion-col>
+            <ion-col>
+              <input name="Insuranceplan" list="InsurancePlan" placeholder="Insurance Name" [(ngModel)]="insuranceplanModel.name" required>
+              <datalist id="InsurancePlan">
+                <option *ngFor="let insuranceplan of insurancePlans" [value]="insuranceplan.name"></option>
+              </datalist>
+              
+            </ion-col>
+            <ion-col class="thin-col">
+              <ion-button (click)="addInsurancePlan(insuranceplanModel.name)">+</ion-button>
+            </ion-col>  
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              
+           
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-buttons slot="start">
+          <ion-button color="primary" (click)="callCommonService('save')">
+            <ion-icon slot="icon-only" name="save"></ion-icon>
+          </ion-button>
+  
+          <ion-button color="danger" type="reset" (click)="callCommonService('reset')">
+            <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
+          </ion-button>
+  
+        </ion-buttons>
+      </ion-card-content>
+    </ion-card>
+  </form>
   <form id="ngForm" name="InsuranceForm" #InsuranceForm="ngForm"
   (ngSubmit)="addInsurance(InsuranceForm)">
   <ion-card id="personalInfo">
@@ -19,13 +64,13 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <input list="lstProductCategory"  placeholder="*Product Category" (change)="getInsurancePlan($event.target.value)">
+            <input list="lstProductCategory"  placeholder="*Product Category" (change)="getInsurancePlan($event.target.value)" > 
             <datalist id="lstProductCategory">
               <option *ngFor="let insuranceCategory of insuranceCategories" [value]="insuranceCategory.name">{{insuranceCategory.name}}</option>
             </datalist>
           </ion-col>
           <ion-col>
-            <input list="lstPlanCategory"  placeholder="*Plan Category">
+            <input list="lstPlanCategory"  placeholder="*Plan Category" >
             <datalist id="lstPlanCategory">
               <option *ngFor="let insurancePlan of insurancePlans" [value]="insurancePlan.name">{{insurancePlan.name}}</option>
             </datalist>
@@ -83,6 +128,7 @@
   </ion-card>
 
 </form>
+
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-toolbar>
