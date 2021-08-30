@@ -15,7 +15,8 @@ export class InsuranceMasterService {
     private http: HttpClient,
     ) { 
         this.reqHeader = new HttpHeaders({
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Methods":"GET, POST, PUT, DELETE, OPTIONS"
         });
     }
 
@@ -34,5 +35,14 @@ export class InsuranceMasterService {
   public postInsuraceplans(insurancePlans:Array<InsurancePlanModel>):Observable<any>{
     const url = this.config.baseurl+this.config.plans;
     return this.http.post(url, insurancePlans, {headers:this.reqHeader})
+  }
+
+  public deletInsuraceCategory(id:string):Observable<any>{
+    const url = this.config.baseurl+this.config.category+"?id="+id;
+    return this.http.delete(url,{headers:this.reqHeader})
+  }
+  public deleteInsuracePlan(id:string):Observable<any>{
+    const url = this.config.baseurl+this.config.plans+"?id="+id;
+    return this.http.delete(url,{headers:this.reqHeader})
   }
 }

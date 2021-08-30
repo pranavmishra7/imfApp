@@ -5,4 +5,5 @@ export class InsuranceCategoryModel{
     name:string;
     insurancePlans:Array<InsurancePlanModel>;
     isActive:boolean;
+    isSelected:boolean
 }

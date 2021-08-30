@@ -38,14 +38,18 @@
                   <ion-button color="secondary" (click)="selectCategory(_insuranceCategory)">
                     <ion-icon name="pencil-outline"></ion-icon>
                   </ion-button>
+                  <ion-button color="secondary" (click)=" DeleteConfirmation(_insuranceCategory.id, 'Category')">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </ion-button>
+                  
                 </ion-item>
               </ion-list>
               <ion-buttons slot="start">
-                <ion-button type=" submit" color="primary">
+                <ion-button [disabled]="!InsuranceCategoryForm.valid" type=" submit" color="primary">
                   <ion-icon slot="icon-only" name="save"></ion-icon>
                 </ion-button>
 
-                <ion-button color="danger" type="reset">
+                <ion-button [disabled]="!InsuranceCategoryForm.valid" color="danger" type="reset">
                   <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
                 </ion-button>
 
@@ -67,14 +71,17 @@
                 <ion-button color="secondary" (click)="selectPlan(_insuranceplan)">
                   <ion-icon name="pencil-outline"></ion-icon>
                 </ion-button>
+                <ion-button color="secondary" (click)=" DeleteConfirmation(_insuranceplan.id, 'Plan')">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
               </ion-item>
             </ion-list>
             <ion-buttons slot="start">
-              <ion-button type=" submit" color="primary">
+              <ion-button [disabled]="!insurancePlanForm.touched" type=" submit" color="primary">
                 <ion-icon slot="icon-only" name="save"></ion-icon>
               </ion-button>
 
-              <ion-button color="danger" type="reset">
+              <ion-button [disabled]="!insurancePlanForm.touched" color="danger" type="reset">
                 <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
               </ion-button>
 
@@ -109,8 +116,7 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              <input list="lstProductCategory" placeholder="*Product Category"
-                (change)="getInsurancePlan($event.target.value)" autocomplete="off">
+              <input list="lstProductCategory" placeholder="*Product Category" autocomplete="off">
               <datalist id="lstProductCategory">
                 <option *ngFor="let insuranceCategory of insuranceCategories" [value]="insuranceCategory.name">
                   {{insuranceCategory.name}}</option>
