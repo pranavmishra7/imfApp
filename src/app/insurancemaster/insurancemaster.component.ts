@@ -20,8 +20,6 @@ export class InsurancemasterComponent implements OnInit {
   selectInterface: string = "popover";
   insuranceCategories: Array<InsuranceCategoryModel> = []
   insurancePlans: Array<InsurancePlanModel> = [];
-
-  lifeInsurancePlan: Array<InsurancePlanModel> = [];
   // motorInsurancePlan:Array<InsurancePlanModel>=[];
   // healthInsurancePlan:Array<InsurancePlanModel>=[];
   // travelInsurancePlan:Array<InsurancePlanModel>=[];
@@ -31,12 +29,12 @@ export class InsurancemasterComponent implements OnInit {
   // bytesizeInsurancePlan:Array<InsurancePlanModel>=[];
   constructor(
     public insuranceMasterModel: InsuranceMaster,
-    public insuranceplanModel: InsurancePlanModel,
     public insuranceCategory: InsuranceCategoryModel,
     public _mongoservice: MongoService,
     public _platform: Platform,
     public _insuranceMasterService: InsuranceMasterService,
     public toastLoadController: ToastLoadController,
+    public insurancePlan: InsurancePlanModel
   ) {
     //_mongoservice.connectdb();
     let platforms = _platform.platforms()
@@ -53,22 +51,29 @@ export class InsurancemasterComponent implements OnInit {
       this.insuranceCategories = response
     })
   }
-  getInsurancePlans(id:string){
-    this._insuranceMasterService.getInsuracePlans(id).subscribe(response=>{
-      this.insurancePlans=response
-    })
-  }
-  addInsurancePlan(name: string) {
-    if (name && name.length > 0) {
-      let insuranceplan = new InsurancePlanModel();
-      insuranceplan.name = name;
-      insuranceplan.isActive = true;
-      this.insurancePlans.push(insuranceplan);
-      this.insuranceplanModel.name = "";
-      this.insuranceCategory.insurancePlans = this.insurancePlans;
+  getInsurancePlans(name: string) {
+    if (name.length > 0) {
+      this.insuranceCategory = this.insuranceCategories.find(x => x.name == name)
+      if (this.insuranceCategory != undefined) {
+        this._insuranceMasterService.getInsuracePlans(this.insuranceCategory.id).subscribe(response => {
+          this.insurancePlans = response
+        })
+      }
+    } else {
+      this.insurancePlans = [];
+      this.getInsuranceCategories();
+      this.insuranceCategory = new InsuranceCategoryModel();
     }
-    else {
-      alert("Invalid Input")
+
+  }
+  addInsurancePlan(_insurancePlan: InsurancePlanModel) {
+    if (_insurancePlan.name && _insurancePlan.name.length > 0) {
+      let insuranceplan = new InsurancePlanModel();
+      insuranceplan.name = _insurancePlan.name;
+      insuranceplan.isActive = true;
+      insuranceplan.insuranceCategoryId= this.insuranceCategory.id;
+      this.insurancePlans.push(insuranceplan);
+      this.insurancePlan= new InsurancePlanModel()
     }
   }
   saveInsuranceCategory(form: NgForm) {
@@ -77,29 +82,39 @@ export class InsurancemasterComponent implements OnInit {
       this.toastLoadController.presentLoading()
       this._insuranceMasterService.postInsuraceCategory(this.insuranceCategory).subscribe(response => {
         if (response) {
+          this.insuranceCategory = response;
           this.getInsuranceCategories();
           this.toastLoadController.presentToast(true);
         }
       })
     }
   }
-  resetModel(modelname: string) {
-    switch (modelname) {
-      case "insuranceCategory":
-        this.insuranceCategory = new InsuranceCategoryModel();
-        this.insurancePlans = [];
-        break;
 
-      default:
-        break;
+  saveInsurancePlan(insurancePlanForm:NgForm){
+    if(insurancePlanForm.valid){
+      this.toastLoadController.presentLoading()
+      this._insuranceMasterService.postInsuraceplans(this.insurancePlans).subscribe(response=>{
+        if(response){
+          this.insurancePlans=response;
+          this.toastLoadController.presentToast(true);
+        }
+      })
     }
+
   }
-  setInsurancecategory(id: string) {
-    if(this.insuranceCategories.find(x => x.name == id)!=undefined)
-    {
-      this.insuranceCategory = this.insuranceCategories.find(x => x.name == id)
-      this. getInsurancePlans(this.insuranceCategory.id)
+
+  selectCategory(_insuranceCategory: InsuranceCategoryModel) {
+    this.insuranceCategory = JSON.parse(JSON.stringify(_insuranceCategory));
+  }
+  initModel() {
+    this.insuranceCategory = new InsuranceCategoryModel();
+  }
+  selectPlan(_insuranceplan) {
+    this.insurancePlan = _insuranceplan;
+  }
+  clearCategory(name:string){
+    if(!name || name.length==0){
+      this.initModel();
     }
-    
   }
 }

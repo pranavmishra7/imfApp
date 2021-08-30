@@ -51,6 +51,7 @@ public async presentToast(isSuccess:boolean) {
         message: message,
         position: 'top',
         duration: 2000,
+        animated:true
     });
     await toast.present();
 

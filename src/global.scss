@@ -43,3 +43,15 @@ ion-input{
   padding: 5px;
   margin-right: 8px;
 }
+ion-list{
+  border-radius: 5px;
+  overflow: scroll;
+  height: 200px;
+  overflow-x: auto;
+}
+input[type=search]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}
+.mt-5{
+  margin-top: 5px;
+}

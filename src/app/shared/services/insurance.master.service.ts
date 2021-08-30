@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InsuranceCategoryModel } from 'src/app/Models/insurance.category.model';
+import { InsurancePlanModel } from 'src/app/Models/insurance.plan.model';
 import { AppConfig } from '../app.config';
 
 @Injectable({
@@ -18,7 +19,7 @@ export class InsuranceMasterService {
         });
     }
 
-  public postInsuraceCategory(insuranceCategories:InsuranceCategoryModel){
+  public postInsuraceCategory(insuranceCategories:InsuranceCategoryModel):Observable<any>{
     const url = this.config.baseurl+this.config.category;
     return this.http.post(url, insuranceCategories, {headers:this.reqHeader})
   }
@@ -29,5 +30,9 @@ export class InsuranceMasterService {
   public getInsuracePlans(id:string):Observable<any>{
     const url = this.config.baseurl+this.config.plans+"?categoryId="+id;
     return this.http.get(url,  {headers:this.reqHeader})
+  }
+  public postInsuraceplans(insurancePlans:Array<InsurancePlanModel>):Observable<any>{
+    const url = this.config.baseurl+this.config.plans;
+    return this.http.post(url, insurancePlans, {headers:this.reqHeader})
   }
 }
