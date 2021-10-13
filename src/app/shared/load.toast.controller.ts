@@ -21,6 +21,7 @@ export class ToastLoadController {
             animated: true
         });
         await loading.present();
+        loading.dismiss();
 
         const { role, data } = await loading.onDidDismiss();
         console.log('Loading dismissed with role:', role);
@@ -78,30 +79,6 @@ export class ToastLoadController {
         const { role } = await toast.onDidDismiss();
         console.log('onDidDismiss resolved with role', role);
     }
-    async presentAlertConfirm() {
-        const alert = await this.alertController.create({
-          cssClass: 'my-custom-class',
-          header: 'Confirm!',
-          message: 'Message <strong>text</strong>!!!',
-          buttons: [
-            {
-              text: 'Cancel',
-              role: 'cancel',
-              cssClass: 'secondary',
-              handler: (blah) => {
-                console.log('Confirm Cancel: blah');
-              }
-            }, {
-              text: 'Okay',
-              handler: () => {
-                console.log('Confirm Okay');
-              }
-            }
-          ]
-        });
-    
-        await alert.present();
-      }
 
       public Alert = {
         confirm: (msg?, header?) => {
@@ -138,5 +115,25 @@ export class ToastLoadController {
     
           (await alert).present();
         }
+      }
+
+      public Spinner={
+          present:(msg?)=>{
+            
+           return this.loadingController.create({
+                spinner: "circles",
+                message: msg,
+                translucent: true,
+                cssClass: 'custom-loader',
+                backdropDismiss: true,
+                animated: true  
+            }).then(s=>{
+                s.present()
+            });
+          },
+          dismiss:()=>{
+           
+             return  this.loadingController.dismiss()
+          }
       }
 }

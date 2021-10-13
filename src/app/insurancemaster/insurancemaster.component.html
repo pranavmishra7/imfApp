@@ -116,7 +116,7 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              <input list="lstProductCategory" placeholder="*Product Category" autocomplete="off">
+              <input name="productcategory" list="lstProductCategory" placeholder="*Product Category" [(ngModel)]="insuranceDetails.productCategory.name" autocomplete="off" (change)="getInsurancePlansbyCategoryName($event.target.value)">
               <datalist id="lstProductCategory">
                 <option *ngFor="let insuranceCategory of insuranceCategories" [value]="insuranceCategory.name">
                   {{insuranceCategory.name}}</option>
@@ -159,13 +159,14 @@
               <ion-input placeholder="*Policy Term" IntegerInput inputmode="numeric"></ion-input>
             </ion-col>
             <ion-col style="width: 50%;">
-              <ion-select placeholder="*Premium Paying Mode" [interface]="selectInterface">
-                <ion-select-option> Annually </ion-select-option>
-                <ion-select-option> Half Yearly </ion-select-option>
-                <ion-select-option> Quarterly </ion-select-option>
-                <ion-select-option> Monthly </ion-select-option>
-                <ion-select-option> One Time </ion-select-option>
-              </ion-select>
+              <input name="ppm" list="ppm" placeholder="*Premium Paying Mode" autocomplete="off" >
+              <datalist id="ppm">
+                <option>Annually</option>
+                <option>Half Yearly</option>
+                <option>Quarterly</option>
+                <option>Monthly</option>
+                <option>One Time</option>
+              </datalist>
             </ion-col>
           </ion-row>
           <ion-row>

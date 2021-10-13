@@ -24,12 +24,14 @@ export class InsuranceMasterService {
     const url = this.config.baseurl+this.config.category;
     return this.http.post(url, insuranceCategories, {headers:this.reqHeader})
   }
-  public getInsuraceCategories():Observable<any>{
-    const url = this.config.baseurl+this.config.category;
+  public getInsuraceCategories(orderBy?:string, direction?:string):Observable<any>{
+    let orderQuery="?orderBy="+orderBy+"&"+"direction="+direction;
+    const url = this.config.baseurl+this.config.category+"?orderBy="+orderBy+"&"+"direction="+direction;
     return this.http.get(url,  {headers:this.reqHeader})
   }
-  public getInsuracePlans(id:string):Observable<any>{
-    const url = this.config.baseurl+this.config.plans+"?categoryId="+id;
+  public getInsuracePlans(id:string, orderBy?:string, direction?:string):Observable<any>{
+    let orderQuery="&orderBy="+orderBy+"&"+"direction="+direction;
+    const url = this.config.baseurl+this.config.plans+"?categoryId="+id+orderQuery;
     return this.http.get(url,  {headers:this.reqHeader})
   }
   public postInsuraceplans(insurancePlans:Array<InsurancePlanModel>):Observable<any>{
